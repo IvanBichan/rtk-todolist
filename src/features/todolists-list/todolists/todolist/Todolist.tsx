@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect } from 'react'
-import { Delete } from '@mui/icons-material'
-import { Button, IconButton } from '@mui/material'
-import { Task } from 'features/todolists-list/todolists/todolist/Task/Task'
-import { FilterValuesType, TodolistDomainType } from 'features/todolists-list/todolists/todolists.reducer'
-import { tasksThunks } from 'features/todolists-list/tasks/tasks.reducer';
-import { TaskStatuses } from 'common/enums';
-import { useActions, useAppDispatch } from 'common/hooks';
-import { AddItemForm, EditableSpan } from 'common/components'
+import React, {useCallback, useEffect} from 'react'
+import {Delete} from '@mui/icons-material'
+import {Button, IconButton} from '@mui/material'
+import {Task} from 'features/todolists-list/todolists/todolist/Task/Task'
+import {FilterValuesType, TodolistDomainType} from 'features/todolists-list/todolists/todolists.reducer'
+import {tasksThunks} from 'features/todolists-list/tasks/tasks.reducer';
+import {TaskStatuses} from 'common/enums';
+import {useActions} from 'common/hooks';
+import {AddItemForm, EditableSpan} from 'common/components'
 import {TaskType} from "features/todolists-list/tasks/tasks.api";
 
 type PropsType = {
@@ -14,9 +14,6 @@ type PropsType = {
 	tasks: TaskType[]
 	changeFilter: (value: FilterValuesType, todolistId: string) => void
 	addTask: (title: string, todolistId: string) => void
-	changeTaskStatus: (id: string, status: TaskStatuses, todolistId: string) => void
-	changeTaskTitle: (taskId: string, newTitle: string, todolistId: string) => void
-	removeTask: (taskId: string, todolistId: string) => void
 	removeTodolist: (id: string) => void
 	changeTodolistTitle: (id: string, newTitle: string) => void
 }
@@ -63,11 +60,7 @@ export const Todolist = React.memo(function (props: PropsType) {
 		<AddItemForm addItem={addTask} disabled={props.todolist.entityStatus === 'loading'}/>
 		<div>
 			{
-				tasksForTodolist.map(t => <Task key={t.id} task={t} todolistId={props.todolist.id}
-												removeTask={props.removeTask}
-												changeTaskTitle={props.changeTaskTitle}
-												changeTaskStatus={props.changeTaskStatus}
-				/>)
+				tasksForTodolist.map(t => <Task key={t.id} task={t} todolistId={props.todolist.id}/>)
 			}
 		</div>
 		<div style={{paddingTop: '10px'}}>
