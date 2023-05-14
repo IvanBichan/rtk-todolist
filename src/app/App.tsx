@@ -12,9 +12,9 @@ import {
 	Typography
 } from '@mui/material';
 import { Menu } from '@mui/icons-material'
-import { Login } from 'features/auth/Login/Login'
+import { Login } from 'features/auth/login/Login'
 import './App.css'
-import { TodolistsList } from 'features/TodolistsList/TodolistsLists'
+import { TodolistsList } from 'features/todolists-list/TodolistsLists'
 import { ErrorSnackbar } from 'common/components'
 import { useActions } from 'common/hooks';
 import { selectIsLoggedIn } from 'features/auth/auth.selectors';
@@ -29,10 +29,10 @@ function App() {
 	const {initializeApp, logout} = useActions(authThunks)
 
 	useEffect(() => {
-		initializeApp()
+		initializeApp({})
 	}, [])
 
-	const logoutHandler = () => logout()
+	const logoutHandler = () => logout({})
 
 	if (!isInitialized) {
 		return <div
