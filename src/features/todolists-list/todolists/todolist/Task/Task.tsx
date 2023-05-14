@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react'
+import React, {ChangeEvent, FC, memo} from 'react'
 import {Checkbox, IconButton} from '@mui/material'
 import {Delete} from '@mui/icons-material'
 import {EditableSpan} from 'common/components'
@@ -8,46 +8,46 @@ import {useActions} from "common/hooks";
 import {tasksThunks} from "features/todolists-list/tasks/tasks.reducer";
 import s from './Task.module.css'
 
-type TaskPropsType = {
+type TaskProps = {
 	task: TaskType
 	todolistId: string
 }
 
-export const Task = React.memo((props: TaskPropsType) => {
+export const Task:FC<TaskProps> = memo(({task, todolistId}) => {
 
 	const {removeTask, updateTask} = useActions(tasksThunks)
 
 	const removeTaskHandler = () => removeTask({
-		taskId:props.task.id,
-		todolistId:props.todolistId
+		taskId:task.id,
+		todolistId:todolistId
 	});
 
 	const changeStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		const status = e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New
 		updateTask({
-			taskId:props.task.id,
+			taskId:task.id,
 			domainModel:{status},
-			todolistId: props.todolistId
+			todolistId: todolistId
 		})
 	};
 
 	const changeTitleHandler = (title: string) => {
 		updateTask({
-			taskId: props.task.id,
+			taskId: task.id,
 			domainModel: {title},
-			todolistId: props.todolistId
+			todolistId: todolistId
 		})
 	};
 
 
-	return <div key={props.task.id} className={props.task.status === TaskStatuses.Completed ? s.isDone : ''}>
+	return <div key={task.id} className={task.status === TaskStatuses.Completed ? s.isDone : ''}>
 		<Checkbox
-			checked={props.task.status === TaskStatuses.Completed}
+			checked={task.status === TaskStatuses.Completed}
 			color="primary"
 			onChange={changeStatusHandler}
 		/>
 
-		<EditableSpan value={props.task.title} onChange={changeTitleHandler}/>
+		<EditableSpan value={task.title} onChange={changeTitleHandler}/>
 		<IconButton onClick={removeTaskHandler}>
 			<Delete/>
 		</IconButton>
