@@ -1,7 +1,6 @@
-import React, {FC, useEffect} from 'react'
+import React, {FC, memo, useEffect} from 'react'
 import {Delete} from '@mui/icons-material'
 import {IconButton} from '@mui/material'
-import {Task} from 'features/todolists-list/todolists/todolist/Task/Task'
 import {TodolistDomainType, todolistsThunks} from 'features/todolists-list/todolists/todolists.reducer'
 import {tasksThunks} from 'features/todolists-list/tasks/tasks.reducer';
 import {TaskStatuses} from 'common/enums';
@@ -9,13 +8,14 @@ import {useActions} from 'common/hooks';
 import {AddItemForm, EditableSpan} from 'common/components'
 import {TaskType} from "features/todolists-list/tasks/tasks.api";
 import {FilterTasksButtons} from "features/todolists-list/todolists/todolist/filterTasksButtons/FilterTasksButtons";
+import {Tasks} from "features/todolists-list/todolists/todolist/tasks/Tasks";
 
 type PropsType = {
     todolist: TodolistDomainType
     tasks: TaskType[]
 }
 
-export const Todolist: FC<PropsType> = React.memo(function ({todolist, tasks}) {
+export const Todolist: FC<PropsType> = memo(function ({todolist, tasks}) {
 
     const {fetchTasks, addTask} = useActions(tasksThunks)
     const {removeTodolist, changeTodolistTitle} = useActions(todolistsThunks)
@@ -54,9 +54,10 @@ export const Todolist: FC<PropsType> = React.memo(function ({todolist, tasks}) {
         </h3>
         <AddItemForm addItem={addTaskCallback} disabled={todolist.entityStatus === 'loading'}/>
         <div>
-            {
-                tasksForTodolist.map(t => <Task key={t.id} task={t} todolistId={todolist.id}/>)
-            }
+            <Tasks tasksForTodolist={tasksForTodolist} todolistId={todolist.id}/>
+            {/*{
+                tasksForTodolist.map(t => <task key={t.id} task={t} todolistId={todolist.id}/>)
+            }*/}
         </div>
         <div style={{paddingTop: '10px'}}>
             <FilterTasksButtons  todolist={todolist}/>
