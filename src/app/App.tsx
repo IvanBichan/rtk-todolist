@@ -69,8 +69,8 @@ function App() {
         </AppBar>
         <Container fixed>
           <Routes>
-            <Route path={"/rtk-todolist/"} element={<TodolistsList />} />
-            <Route path={"/login"} element={<Login />} />
+            <Route path={"/"} element={<TodolistsList />} />
+            <Route path={"/login/"} element={<Login />} />
           </Routes>
         </Container>
       </div>
