@@ -29,7 +29,7 @@ export const TodolistsList = () => {
   }, []);
 
   if (!isLoggedIn) {
-    return <Navigate to={"/rtk-todolist/login/"} />;
+    return <Navigate to={"/login"} />;
   }
 
   return (
