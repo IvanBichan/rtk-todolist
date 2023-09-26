@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {
   AppBar,
   Button,
@@ -69,8 +69,9 @@ function App() {
         </AppBar>
         <Container fixed>
           <Routes>
-            <Route path="/" element={<TodolistsList />} />
-            <Route path="login" element={<Login />} />
+            <Route path='/' element={<Navigate to={"rtk-todolist/"}/>}/>
+            <Route path="rtk-todolist/" element={<TodolistsList />} />
+            <Route path="rtk-todolist/login" element={<Login />} />
           </Routes>
         </Container>
       </div>
