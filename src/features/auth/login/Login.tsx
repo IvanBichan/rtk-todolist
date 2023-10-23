@@ -69,7 +69,7 @@ export const Login = () => {
                                     here
                                 </a>
                             </p>
-                            <p>or use common test account credentials:</p> <Button onClick={()=> setOpenText(!openText)}>Show Text</Button>
+                            <p>or use common test account credentials:</p> <Button onClick={()=> setOpenText(!openText)}>Quick login</Button>
                             {openText && <div><p> Email: free@samuraijs.com</p>
                                 <p>Password: free</p></div>}
 
