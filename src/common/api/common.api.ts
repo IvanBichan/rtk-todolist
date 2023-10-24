@@ -1,9 +1,10 @@
 import axios from "axios";
+import process from 'process';
 
 export const instance = axios.create({
-  baseURL: "https://social-network.samuraijs.com/api/1.1/",
-  withCredentials: true,
-  headers: {
-    "API-KEY": "1cdd9f77-c60e-4af5-b194-659e4ebd5d41",
-  },
+    baseURL: process.env.REACT_APP_API_URL,
+    withCredentials: true,
+    headers: {
+        "API-KEY": process.env.REACT_APP_API_KEY,
+    },
 });
